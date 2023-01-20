@@ -1,82 +1,122 @@
 const pointsEl = document.querySelector(".points")
+const pointsCompEl = document.querySelector(".comp-points")
 let choiseBtn = document.querySelectorAll(".choise")
-// const choiseRock = document.querySelector(".rock")
-// const choiseScissors = document.querySelector(".scissors")
-// const choisePaper = document.querySelector(".paper")
+let rock = document.querySelector(".rock")
+let scissors = document.querySelector(".scissors")
+let paper = document.querySelector(".paper")
 const computerChoise = ["Sten", "Sax", "Påse"]
-const computerResult = document.querySelector(".computer")
+const computerResult = document.querySelectorAll(".choise-btn")
 const resultEl = document.querySelector(".result")
 let randomChoise
 let userChoise
 let points = 0
+let compPoints = 0
+let value 
 
-
-function setComputerChoise() {
-  randomChoise = computerChoise[(Math.floor(Math.random() * (computerChoise.length)))]
-  return randomChoise
+function gameOn(userChoise) {
+    setComputerChoise()
+    compareChoises(userChoise)
 }
 
+rock.addEventListener("click", () => {
+  userChoise = "Sten"
+  gameOn(userChoise)
+})
 
-for(let i = 0; i < choiseBtn.length; i++) {
-  choiseBtn[i].addEventListener("click", () => {
-    let value = choiseBtn[i]
-    getUserChoise(value)
-    console.log(userChoise)
-    setComputerChoise()
-    compareChoises()
-    computerResult.innerHTML = randomChoise
-  })}
+paper.addEventListener("click", () => {
+  userChoise = "Påse"
+  gameOn(userChoise)
+})
 
-  function getUserChoise(j) {
-    if (j == button.choise.scissors) {
-      userChoise === "Sten"
-      
-      console.log(userChoise)
+scissors.addEventListener("click", () => {
+  userChoise = "Sax"
+  gameOn(userChoise)
+})
+
+  //FUNCTIONS
+  //Set users choise depending on clicked button
+  // function getUserChoise(j) {
+  //   if (j == "Sten") {
+  //     userChoise = "Sten"
+  //     console.log(userChoise)
+  //   }
+  //   if (j == "Sax") {
+  //     userChoise = "Sax"
+  //   }
+  //     if (j == "Påse") {
+  //     userChoise ="Påse"
+  //   }
+  // }
+
+  //Generate random choise for computer
+  function setComputerChoise() {
+    
+    randomChoise = computerChoise[(Math.floor(Math.random() * (computerChoise.length)))]
+    showComputerChoise()
     }
-    if (j == 1) {
-      userChoise === "Sax"
-      return userChoise
-    }
-      if (j == 2) {
-      userChoise ==="Påse"
-      return userChoise
+     
+    let a = document.getElementById("paper").classList
+    let b = document.getElementById("scissors").classList
+    let c = document.getElementById("rock").classList
+
+    function showComputerChoise() {
+      removeActiveClasses()
+      if (randomChoise == "Påse") {
+        a.add("active")
+      }
+      if (randomChoise == "Sax") {
+        b.add("active")
+      }
+      if (randomChoise == "Sten") {
+        c.add("active")
+      }
     }
 
-
+    function removeActiveClasses() {
+      computerResult.forEach(btn => {
+          btn.classList.remove('active')
+      })
   }
 
-// choiseScissors.addEventListener("click", () => {
-//   userChoise = "Påse"
-//   setComputerChoise()
-//   compareChoises()
-//   computerResult.innerHTML = randomChoise
-// })
-// choiseRock.addEventListener("click", () => {
-//   userChoise = "Påse"
-//   setComputerChoise()
-//   compareChoises()
-//   computerResult.innerHTML = randomChoise
-// })
-
-
-function compareChoises() {
-  //console.log(userChoise)
- // console.log(randomChoise)
+    // function choiseVarables() {
+    //   if (randomChoise === rock) {
+    //     randomChoise = "Sten"
+    //   }
+    //   if (randomChoise === paper) {
+    //     randomChoise = "Påse"
+    //   }
+    //   if (randomChoise === scissors) {
+    //     randomChoise = "Sax"
+    //   }
+      
+    // }
+  //Compare users choise with computers choise
+function compareChoises(userChoise) {
   if (userChoise === randomChoise) {
-    resultEl.innerText = "Oavgjort!"
   }
   if (((userChoise === "Påse") && (randomChoise === "Sax")) || ((userChoise === "Sax") && (randomChoise === "Sten")) || ((userChoise === "Sten") && (randomChoise === "Påse"))) {
-    resultEl.innerText = "Du förlorade!"
-    console.log("test2")
+    compPoints++
+    pointsCompEl.innerText = compPoints
   }
   if (((randomChoise === "Påse") && (userChoise === "Sax")) || ((randomChoise === "Sax") && (userChoise === "Sten")) || ((randomChoise === "Sten") && (userChoise === "Påse"))){
-    resultEl.innerText = "Du vann!"
-    console.log("test3")
     points++
-    pointsEl.innerText = points
+    pointsEl.innerHTML = points
+  }
+  if (points > 4) {
+    resultEl.innerHTML = "Grattis! Du vann! &#x1F604;"
+    disableBtns()
+  }
+  if (compPoints > 4) {
+    resultEl.innerHTML = "Tyvärr, du förlorade &#128532;"
+    disableBtns()
   }
 }
-
-if (points === 5) {
-  resultEl.innerText = "Grattis! Du vann!"
+function disableBtns() {
+  choiseBtn.forEach((button) => { 
+    button.disabled = true
+  })
 }
+
+document.querySelector(".btn").addEventListener('click', () => {
+  location.reload();
+})

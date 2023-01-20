@@ -15,17 +15,22 @@
     <p>Lycka till!</p>
   </article>
   <article>
-    <h2>Poäng: <span class="points">0</span></h2>
-    <h2 class="result"></h2>
+    <section class="points-container">
+      <h2>Poäng: <span class="points">0</span></h2>
+      <h2>Poäng: <span class="comp-points">0</span></h2>
+    </section>
+      <h2 class="result"></h2>
   </article>  
   <div class="container">
     <article class="game-container user">
-      <button class="choise rock">Sten</button>
-      <button class="choise scissors">Sax</button>
-      <button class="choise paper">Påse</button>
+      <button class="choise"><img class="rock" src="rock.png"></button>
+      <button class="choise"><img class="scissors" src="scissors.png"></button>
+      <button class="choise"><img class="paper" src="paper.png"></button>
     </article>
     <article class="game-container computer">
-      <section class="comp-choise rock"><p></p></section>
+      <button id="rock" class="choise-btn rock"><img class="rock" src="rock.png"></button>
+      <button id="scissors" class="choise-btn scissors"><img class="scissors" src="scissors.png"></button>
+      <button id="paper" class="choise-btn paper"><img class="paper" src="paper.png"></button>
     </article>
   </div>
   <button class="btn">Starta om</button>
