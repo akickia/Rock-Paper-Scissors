@@ -10,6 +10,7 @@ body {
   align-items: center;
   justify-content: space-around;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+
 }
 
 .points-container {
@@ -24,6 +25,7 @@ body {
   display: flex;
   justify-content: space-around;
   border-radius: 5px;
+  background-color: white;
 }
 
 .game-container {
@@ -47,28 +49,23 @@ body {
 
 button {
   padding: 1rem;
-  background-color: white;
+  background-color: unset;
   color: black;
   font-size: 1rem;
   border-radius: 5px;
   text-transform: uppercase;
   box-shadow: 2px 2px 5px #6f6f6f;
-  border: none
+  border: none;
+  transition: transform 0.5s ease;
 }
 
 img {
   width: 50px
 }
 
-button:hover {
-  background-color: rgba(0, 0, 0, 0.329);
-  color: white;
-  transform: scale(1.1);
-  transition: all 0.5s ease;
-}
 
 button:active {
-  transform: scale(1);
+  transform: scale(0.95);
 }
 
 button:disabled {
