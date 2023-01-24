@@ -15,20 +15,19 @@ let value
 
 
 
-
-
-
-
   //FUNCTIONS
   //Fires off from onclick in html
   //Generate random choise for computer
   function gameOn(userChoise) {
+    if ((points === 5) || (compPoints === 5)) {
+      disableBtns()
+    }
+    document.querySelector(".equal").innerText = ""
     randomChoise = computerChoise[(Math.floor(Math.random() * (computerChoise.length)))]
     showComputerChoise()
     compareChoises(userChoise)
   }
-     
-
+    
 
   //Add active-class to computers choise to show it in dom
   //       <-------- refactor later (?) ----------------->
@@ -58,40 +57,41 @@ let value
 //Compare users choise with computers choise
 //  <----------- refactor later -------------> 
 function compareChoises(userChoise) {
-  let winner = "lightgreen"
-  let looser = "#ffd4db"
   document.querySelectorAll("button").forEach((button) => {
-    button.style.backgroundColor = "white"
+    button.classList.remove('winn', 'loose')
   })
   if ((userChoise === "Sten") && (randomChoise === "Sax")) {
     points++
-    document.getElementById("u-rock").style.backgroundColor = winner
-    document.getElementById("scissors").style.backgroundColor = looser
+    document.getElementById("u-rock").classList.add('winn')
+    document.getElementById("scissors").classList.add('loose')
   }
   else if ((userChoise === "Sten") && (randomChoise === "Påse")) {
     compPoints++
-    document.getElementById("paper").style.backgroundColor = winner
-    document.getElementById("u-rock").style.backgroundColor = looser
+    document.getElementById("paper").classList.add('winn')
+    document.getElementById("u-rock").classList.add('loose')
   }
   else if ((userChoise === "Sax") && (randomChoise === "Påse")) {
     points++
-    document.getElementById("u-scissors").style.backgroundColor = winner
-    document.getElementById("paper").style.backgroundColor = looser
+    document.getElementById("u-scissors").classList.add('winn')
+    document.getElementById("paper").classList.add('loose')
   }
   else if ((userChoise === "Sax") && (randomChoise === "Sten")) {
     compPoints++
-    document.getElementById("rock").style.backgroundColor = winner
-    document.getElementById("u-scissors").style.backgroundColor = looser
+    document.getElementById("rock").classList.add('winn')
+    document.getElementById("u-scissors").classList.add('loose')
   }
   else if ((userChoise === "Påse") && (randomChoise === "Sten")) {
     points++
-    document.getElementById("u-paper").style.backgroundColor = winner
-    document.getElementById("rock").style.backgroundColor = looser
+    document.getElementById("u-paper").classList.add('winn')
+    document.getElementById("rock").classList.add('loose')
   }
   else if ((userChoise === "Påse") && (randomChoise === "Sax")) {
     compPoints++
-    document.getElementById("scissors").style.backgroundColor = winner
-    document.getElementById("u-paper").style.backgroundColor = looser
+    document.getElementById("scissors").classList.add('winn')
+    document.getElementById("u-paper").classList.add('loose')
+  }
+  else {
+    document.querySelector(".equal").innerText = "Oavgjort, försök igen"
   }
   pointsCompEl.innerText = compPoints
   pointsEl.innerHTML = points
@@ -104,12 +104,10 @@ function endGame() {
   if (points > 4) {
     resultEl.innerHTML = "Grattis! Du vann! &#x1F604;"
     document.querySelector("body").style.backgroundColor = "yellow"
-    disableBtns()
-  }
+    }
   if (compPoints > 4) {
     resultEl.innerHTML = "Tyvärr, du förlorade &#128532;"
     document.querySelector("body").style.backgroundColor = "red"
-    disableBtns()
   }
 }
 
@@ -124,3 +122,19 @@ function disableBtns() {
 document.querySelector(".btn").addEventListener('click', () => {
   location.reload();
 })
+
+//Info module show and hide
+let infoElement = document.querySelector(".icon")
+let infoSection = document.getElementById("info-box")
+
+infoElement.addEventListener("click", () => {
+    infoSection.classList.toggle("hide")
+    if (infoElement.innerText === "i") {
+      infoElement.innerText = "X"
+    }
+    else {
+      infoElement.innerText = "i"
+    }
+    })
+
+

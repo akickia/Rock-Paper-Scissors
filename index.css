@@ -4,13 +4,48 @@
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  position: relative;
+  background-color: rgb(240, 240, 240);
+}
 
+.info {
+  width: 100%;
+  position: absolute;
+
+}
+
+.info div {
+  box-shadow: 2px 2px 5px #6f6f6f;
+  padding: 3rem;
+  max-width: 500px;
+  margin-left: auto;
+  background-color: rgb(225, 225, 225);
+}
+
+.hide {
+  display: none;
+}
+
+
+.info .icon {
+  position: fixed;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  font-size: 1.5rem;
+  font-weight: 900;
+  padding: 1rem;
+  margin: 2rem 2rem -2rem 2rem;
+  border: 1px solid black;
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px #6f6f6f;
+  z-index: 99;
 }
 
 .points-container {
@@ -21,20 +56,22 @@ body {
 .container {
   border: none;
   box-shadow: 2px 2px 5px #6f6f6f;
-  padding: 3rem;
+  padding: 2rem;
   display: flex;
   justify-content: space-around;
   border-radius: 5px;
   background-color: white;
+  margin: 0 0 0.5rem 0;
 }
 
 .game-container {
-  width: 200px;
+  width: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 .game-container button {
   margin: 0.5rem;
 }
@@ -47,9 +84,22 @@ body {
   display: block;
 }
 
+.btn {
+  margin-top: 2rem;
+}
+
+.winn {
+  background-color: lightgreen;
+  animation: winn 0.75s ease-in-out 0s 1;
+}
+
+.loose {
+  background-color: #ffd4db;
+}
+
 button {
+  background-color: white;
   padding: 1rem;
-  background-color: unset;
   color: black;
   font-size: 1rem;
   border-radius: 5px;
@@ -63,7 +113,6 @@ img {
   width: 50px
 }
 
-
 button:active {
   transform: scale(0.95);
 }
@@ -71,4 +120,16 @@ button:active {
 button:disabled {
   color: rgb(206, 206, 206);
   background-color: rgb(242, 242, 242);
+}
+
+@keyframes winn {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
