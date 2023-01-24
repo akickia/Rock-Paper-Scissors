@@ -31,6 +31,9 @@ body {
   display: none;
 }
 
+.info-container {
+  margin-top: 2rem;
+}
 
 .info .icon {
   position: fixed;
@@ -131,5 +134,14 @@ button:disabled {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@media screen and (max-width: 500px){
+
+  .info .icon {
+    transform: scale(0.75);
+    margin: 0.25rem;
+    transition: all 0.5s;
   }
 }
